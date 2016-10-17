@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Secure = () => (
-  <p>Secure Component</p>
+  <p>Secure Component Content</p>
 );
 
 export default Secure;
