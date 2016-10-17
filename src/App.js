@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import NavigationBar from './NavigationBar';
+import ContentArea from './ContentArea';
+
+const contentOptions = [{
+  componentName: 'insecure',
+  component: require('./Insecure').default,
+},{
+  componentName: 'secure',
+  component: require('./Secure').default,
+}];
 
 class App extends Component {
   constructor() {
@@ -21,6 +30,10 @@ class App extends Component {
         <NavigationBar
           active={activeComponent}
           onClick={(activeComponent) => this.setState({ activeComponent })}
+        />
+        <ContentArea
+          contentOptions={contentOptions}
+          selectedContentName={activeComponent}
         />
       </div>
     );
