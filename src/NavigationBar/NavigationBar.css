@@ -1,0 +1,24 @@
+.navigationBar {
+  font-size: 1.2em;
+  list-style-type: none;
+}
+
+.navigationBar > li {
+  display: inline-block;
+  padding: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.navigationBar .active {
+  font-weight: bold;
+}
+
+.navigationBar a,
+.navigationBar a:link,
+.navigationBar a:visited,
+.navigationBar a:hover,
+.navigationBar a:active {
+    color: #000000;
+    text-decoration: none;
+}
