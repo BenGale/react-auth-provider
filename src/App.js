@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import { isAuthenticated } from './Authentication/AuthenticationService';
+import { isAuthenticated, login, logout } from './Authentication/AuthenticationService';
 import AuthenticationProvider from './Authentication/AuthenticationProvider';
 import AuthenticatedComponent from './Authentication/AuthenticatedComponent';
 
@@ -10,16 +10,32 @@ import NavigationBar from './NavigationBar';
 import ContentArea from './ContentArea';
 import Insecure from './Insecure';
 import Secure from './Secure';
-
-const contentOptions = [{
-  componentName: 'insecure',
-  component: <Insecure />,
-},{
-  componentName: 'secure',
-  component: <AuthenticatedComponent><Secure /></AuthenticatedComponent>,
-}];
+import Login from './Login';
 
 class App extends Component {
+  contentOptions = [{
+    componentName: 'insecure',
+    component: <Insecure />,
+  },{
+    componentName: 'secure',
+    component: (
+      <AuthenticatedComponent
+        unauthorisedComponent={
+          <Login login={() => {
+            login();
+            this.forceUpdate()}} // Bit hacky, would be better IRL
+          />
+        }
+      >
+        <Secure
+          logout={() => {
+            logout();
+            this.forceUpdate()}} // Bit hacky, would be better IRL
+        />
+      </AuthenticatedComponent>
+    ),
+  }];
+
   constructor() {
     super();
     this.state = { activeComponent: 'insecure' };
@@ -40,7 +56,7 @@ class App extends Component {
         />
         <AuthenticationProvider getAuthenticationState={isAuthenticated}>
           <ContentArea
-            contentOptions={contentOptions}
+            contentOptions={this.contentOptions}
             selectedContentName={activeComponent}
           />
         </AuthenticationProvider>
