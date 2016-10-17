@@ -7,7 +7,7 @@ const ContentArea = ({ contentOptions, selectedContentName }) => {
 
   return (
     <div>
-      { activeContent.component() }
+      { activeContent.component }
     </div>
   );
 };

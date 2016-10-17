@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+import { isAuthenticated } from './Authentication/AuthenticationService';
+import AuthenticationProvider from './Authentication/AuthenticationProvider';
+import AuthenticatedComponent from './Authentication/AuthenticatedComponent';
+
 import NavigationBar from './NavigationBar';
 import ContentArea from './ContentArea';
+import Insecure from './Insecure';
+import Secure from './Secure';
 
 const contentOptions = [{
   componentName: 'insecure',
-  component: require('./Insecure').default,
+  component: <Insecure />,
 },{
   componentName: 'secure',
-  component: require('./Secure').default,
+  component: <AuthenticatedComponent><Secure /></AuthenticatedComponent>,
 }];
 
 class App extends Component {
@@ -31,10 +38,12 @@ class App extends Component {
           active={activeComponent}
           onClick={(activeComponent) => this.setState({ activeComponent })}
         />
-        <ContentArea
-          contentOptions={contentOptions}
-          selectedContentName={activeComponent}
-        />
+        <AuthenticationProvider getAuthenticationState={isAuthenticated}>
+          <ContentArea
+            contentOptions={contentOptions}
+            selectedContentName={activeComponent}
+          />
+        </AuthenticationProvider>
       </div>
     );
   }
