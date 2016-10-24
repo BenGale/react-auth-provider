@@ -1,21 +1,23 @@
-import { Component, Children, PropTypes } from 'react';
+import React, { Component, Children, PropTypes } from 'react';
 
 class AuthenticatedComponent extends Component {
   componentWillMount() {
-    const { authenticatedComponentWillMount } = this.context;
+    const {
+      authenticatedComponentWillMount = () => {}
+    } = this.context;
 
     authenticatedComponentWillMount();
   }
 
   render() {
-    const { children, unauthorisedComponent = null } = this.props;
+    const { children, unauthorisedComponent } = this.props;
     const { isAuthenticated } = this.context;
 
     if (isAuthenticated) {
       return Children.only(children);
     }
 
-    return unauthorisedComponent;
+    return unauthorisedComponent ? unauthorisedComponent : <div></div>;
   }
 };
 
