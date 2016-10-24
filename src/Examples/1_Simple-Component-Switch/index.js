@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {
   isAuthenticated, login, logout
-} from '../../Authentication/AuthenticationService';
+} from '../Shared/AuthenticationService';
 import {
   AuthenticationProvider, AuthenticatedComponent
 } from '../../Authentication';
@@ -11,7 +11,7 @@ import NavigationBar from '../Shared/NavigationBar';
 import ContentArea from '../Shared/ContentArea';
 import Insecure from '../Shared/Insecure';
 import Secure from '../Shared/Secure';
-import Login from './Login';
+import Login from '../Shared/Login';
 
 class SimpleComponentSwitch extends Component {
   contentOptions = [{

@@ -1,24 +1,31 @@
 import { Component, Children, PropTypes } from 'react';
 
 class AuthenticatedComponent extends Component {
-  render() {
-    const { children, unauthorisedComponent } = this.props;
-    const { getAuthenticationState } = this.context;
+  componentWillMount() {
+    const { authenticatedComponentWillMount } = this.context;
 
-    if (getAuthenticationState()) {
+    authenticatedComponentWillMount();
+  }
+
+  render() {
+    const { children, unauthorisedComponent = null } = this.props;
+    const { isAuthenticated } = this.context;
+
+    if (isAuthenticated) {
       return Children.only(children);
-    } else {
-      return unauthorisedComponent;
     }
+
+    return unauthorisedComponent;
   }
 };
 
 AuthenticatedComponent.propTypes = {
-  unauthorisedComponent: PropTypes.node.isRequired,
+  unauthorisedComponent: PropTypes.node,
 };
 
 AuthenticatedComponent.contextTypes = {
-  getAuthenticationState: PropTypes.func,
+  isAuthenticated: PropTypes.bool.isRequired,
+  authenticatedComponentWillMount: PropTypes.func,
 }
 
 export default AuthenticatedComponent;

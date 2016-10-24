@@ -4,12 +4,17 @@ import './App.css';
 import NavigationBar from './Shared/NavigationBar';
 import ContentArea from './Shared/ContentArea';
 import SimpleSwitch from './1_Simple-Component-Switch';
+import AuthenticatedContainer from './2_Authenticated-Container';
 
 class App extends Component {
   contentOptions = [{
     componentName: 'simple',
     displayName: 'Simple Switch',
     component: <SimpleSwitch />,
+  }, {
+    componentName: 'container',
+    displayName: 'Authenticated Container',
+    component: <AuthenticatedContainer />,
   }];
 
   constructor() {

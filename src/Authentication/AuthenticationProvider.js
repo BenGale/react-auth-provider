@@ -5,7 +5,7 @@ class AuthenticationProvider extends Component {
     const { getAuthenticationState } = this.props;
 
     return {
-      getAuthenticationState
+      isAuthenticated: getAuthenticationState()
     };
   }
 
@@ -21,7 +21,7 @@ AuthenticationProvider.propTypes = {
 };
 
 AuthenticationProvider.childContextTypes = {
-  getAuthenticationState: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default AuthenticationProvider;
