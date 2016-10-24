@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import {
   isAuthenticated, login, logout
 } from '../../Authentication/AuthenticationService';
-import AuthenticationProvider from '../../Authentication/AuthenticationProvider';
-import AuthenticatedComponent from '../../Authentication/AuthenticatedComponent';
+import {
+  AuthenticationProvider, AuthenticatedComponent
+} from '../../Authentication';
 
 import NavigationBar from '../Shared/NavigationBar';
 import ContentArea from '../Shared/ContentArea';
