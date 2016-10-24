@@ -28,7 +28,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h2>Authentication Spike</h2>
+          <h2>React-Auth-Provider Examples</h2>
+          <p>Ben Gale</p>
         </div>
         <NavigationBar
           contentOptions={this.contentOptions}
