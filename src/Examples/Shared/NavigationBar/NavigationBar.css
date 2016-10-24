@@ -1,6 +1,12 @@
 .navigationBar {
   font-size: 1.2em;
   list-style-type: none;
+  background-color: rgb(204, 200, 200);
+  border: 0px;
+  border-top: 1px;
+  border-bottom: 1px;
+  border-color: black;
+  border-style: solid;
 }
 
 .navigationBar > li {
@@ -8,6 +14,14 @@
   padding: 8px;
   cursor: pointer;
   user-select: none;
+  border: 0px;
+  border-left: 1px;
+  border-color: black;
+  border-style: solid;
+}
+
+.navigationBar > li:first-child {
+  border-left: 0px;
 }
 
 .navigationBar .active {

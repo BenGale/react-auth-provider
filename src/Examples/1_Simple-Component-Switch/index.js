@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-import { isAuthenticated, login, logout } from './Authentication/AuthenticationService';
-import AuthenticationProvider from './Authentication/AuthenticationProvider';
-import AuthenticatedComponent from './Authentication/AuthenticatedComponent';
+import {
+  isAuthenticated, login, logout
+} from '../../Authentication/AuthenticationService';
+import AuthenticationProvider from '../../Authentication/AuthenticationProvider';
+import AuthenticatedComponent from '../../Authentication/AuthenticatedComponent';
 
-import NavigationBar from './NavigationBar';
-import ContentArea from './ContentArea';
-import Insecure from './Insecure';
-import Secure from './Secure';
+import NavigationBar from '../Shared/NavigationBar';
+import ContentArea from '../Shared/ContentArea';
+import Insecure from '../Shared/Insecure';
+import Secure from '../Shared/Secure';
 import Login from './Login';
 
-class App extends Component {
+class SimpleComponentSwitch extends Component {
   contentOptions = [{
     componentName: 'insecure',
+    displayName: 'Insecure Component',
     component: <Insecure />,
   },{
     componentName: 'secure',
+    displayName: 'Secure Component',
     component: (
       <AuthenticatedComponent
         unauthorisedComponent={
@@ -45,12 +47,10 @@ class App extends Component {
     const { activeComponent } = this.state;
 
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
+      <div>
+        <h3>Simple Switch Component Example</h3>
         <NavigationBar
+          contentOptions={this.contentOptions}
           active={activeComponent}
           onClick={(activeComponent) => this.setState({ activeComponent })}
         />
@@ -65,4 +65,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SimpleComponentSwitch;

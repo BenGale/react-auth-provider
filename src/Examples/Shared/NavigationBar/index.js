@@ -1,0 +1,29 @@
+import React, { PropTypes } from 'react';
+import './NavigationBar.css';
+
+const NavigationBar = ({ contentOptions, active, onClick }) => (
+  <ul className="navigationBar">
+    { contentOptions.map((content, index) => (
+        <li
+          key={index}
+          className={active === content.componentName ? 'active' : ''}
+        >
+          <a href="#" onClick={() => onClick(content.componentName)}>
+            { content.displayName }
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+);
+
+NavigationBar.propTypes = {
+  contentOptions: PropTypes.arrayOf(PropTypes.shape({
+    componentName: PropTypes.string.isRequired,
+    displayName: PropTypes.string.isRequired,
+  })).isRequired,
+  active: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export default NavigationBar;
