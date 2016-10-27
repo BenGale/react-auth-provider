@@ -1,19 +1,23 @@
 import { Component, Children, PropTypes } from 'react';
 
 class AuthenticatedContainer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const notifyMount = props.onAutheticatedComponentMount || (() => {});
 
     this.state = {
       authenticatedComponentMounted: false,
+      notifyMount,
     };
   }
 
   getChildContext() {
+    const { notifyMount } = this.state;
     const authenticatedComponentWillMount = () => {
       this.setState({
         authenticatedComponentMounted: true,
       });
+      notifyMount();
     };
 
     return {
@@ -36,6 +40,7 @@ class AuthenticatedContainer extends Component {
 
 AuthenticatedContainer.propTypes = {
   unauthorisedComponent: PropTypes.node.isRequired,
+  onAutheticatedComponentMount: PropTypes.func,
 };
 
 AuthenticatedContainer.contextTypes = {

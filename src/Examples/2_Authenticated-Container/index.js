@@ -49,6 +49,7 @@ class AuthenticatedContainerExample extends Component {
         </p>
         <AuthenticationProvider getAuthenticationState={isAuthenticated}>
           <AuthenticatedContainer
+            onAutheticatedComponentMount={() => console.log('MOUNTED')}
             unauthorisedComponent={
               <Login login={() => {
                 login();
