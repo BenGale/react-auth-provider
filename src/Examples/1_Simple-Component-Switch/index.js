@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-  isAuthenticated, login, logout
-} from '../Shared/AuthenticationService';
-import {
   AuthenticationProvider, AuthenticatedComponent
 } from '../../Authentication';
 
@@ -24,28 +21,21 @@ class SimpleComponentSwitch extends Component {
     component: (
       <AuthenticatedComponent
         unauthorisedComponent={
-          <Login login={() => {
-            login();
-            this.forceUpdate()}} // Bit hacky, would be better IRL
-          />
+          <Login login={() => this.setState({ authenticated: true })} />
         }
       >
-        <Secure
-          logout={() => {
-            logout();
-            this.forceUpdate()}} // Bit hacky, would be better IRL
-        />
+        <Secure logout={() => this.setState({ authenticated: false })} />
       </AuthenticatedComponent>
     ),
   }];
 
   constructor() {
     super();
-    this.state = { activeComponent: 'insecure' };
+    this.state = { activeComponent: 'insecure', authenticated: false };
   }
 
   render() {
-    const { activeComponent } = this.state;
+    const { activeComponent, authenticated } = this.state;
 
     return (
       <div>
@@ -55,7 +45,7 @@ class SimpleComponentSwitch extends Component {
           active={activeComponent}
           onClick={(activeComponent) => this.setState({ activeComponent })}
         />
-        <AuthenticationProvider getAuthenticationState={isAuthenticated}>
+        <AuthenticationProvider authenticationState={authenticated}>
           <ContentArea
             contentOptions={this.contentOptions}
             selectedContentName={activeComponent}

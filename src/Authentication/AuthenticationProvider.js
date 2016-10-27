@@ -2,10 +2,10 @@ import { Component, Children, PropTypes } from 'react';
 
 class AuthenticationProvider extends Component {
   getChildContext() {
-    const { getAuthenticationState } = this.props;
+    const { authenticationState } = this.props;
 
     return {
-      isAuthenticated: getAuthenticationState()
+      isAuthenticated: authenticationState,
     };
   }
 
@@ -17,7 +17,7 @@ class AuthenticationProvider extends Component {
 }
 
 AuthenticationProvider.propTypes = {
-  getAuthenticationState: PropTypes.func.isRequired,
+  authenticationState: PropTypes.bool.isRequired,
 };
 
 AuthenticationProvider.childContextTypes = {

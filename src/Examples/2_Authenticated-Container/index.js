@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-  isAuthenticated, login, logout
-} from '../Shared/AuthenticationService';
-import {
   AuthenticationProvider, AuthenticatedComponent, AuthenticatedContainer,
 } from '../../Authentication';
 
@@ -23,22 +20,18 @@ class AuthenticatedContainerExample extends Component {
     displayName: 'Secure Component',
     component: (
       <AuthenticatedComponent>
-        <Secure
-          logout={() => {
-            logout();
-            this.forceUpdate()}} // Bit hacky, would be better IRL
-        />
+        <Secure logout={() => this.setState({ authenticated: false })} />
       </AuthenticatedComponent>
     ),
   }];
 
   constructor() {
     super();
-    this.state = { activeComponent: 'insecure' };
+    this.state = { activeComponent: 'insecure', authenticated: false };
   }
 
   render() {
-    const { activeComponent } = this.state;
+    const { activeComponent, authenticated } = this.state;
 
     return (
       <div>
@@ -47,14 +40,11 @@ class AuthenticatedContainerExample extends Component {
           When you click to show the secure component, the whole container
           will hide, including the navigation.
         </p>
-        <AuthenticationProvider getAuthenticationState={isAuthenticated}>
+        <AuthenticationProvider authenticationState={authenticated}>
           <AuthenticatedContainer
             onAutheticatedComponentMount={() => console.log('MOUNTED')}
             unauthorisedComponent={
-              <Login login={() => {
-                login();
-                this.forceUpdate()}} // Bit hacky, would be better IRL
-              />
+              <Login login={() => this.setState({ authenticated: true })} />
             }
           >
             <div>

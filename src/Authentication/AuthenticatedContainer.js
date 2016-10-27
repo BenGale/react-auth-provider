@@ -13,11 +13,15 @@ class AuthenticatedContainer extends Component {
 
   getChildContext() {
     const { notifyMount } = this.state;
+    const { isAuthenticated } = this.context;
+
     const authenticatedComponentWillMount = () => {
       this.setState({
         authenticatedComponentMounted: true,
       });
-      notifyMount();
+      if (!isAuthenticated) {
+        notifyMount();
+      }
     };
 
     return {
