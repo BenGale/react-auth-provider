@@ -1,6 +1,6 @@
 {
   "name": "react-auth-provider",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Ben Gale",
   "main": "src/Authentication/index.js",
   "homepage": "http://bengale.github.io/react-auth-provider",
