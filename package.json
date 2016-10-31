@@ -12,7 +12,7 @@
   "scripts": {
     "start": "react-scripts start",
     "prebuild": "rimraf lib/",
-    "build": "babel --presets es2015,stage-0,react -d lib/ src/Authentication",
+    "build": "babel --presets es2015,stage-0,react --ignore __tests__ -d lib/ src/Authentication",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "prepublish": "npm run build",
