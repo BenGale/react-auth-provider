@@ -4,8 +4,8 @@ node_modules
 # testing
 coverage
 
-# production
-build
+# es2015
+src
 
 # misc
 .DS_Store
