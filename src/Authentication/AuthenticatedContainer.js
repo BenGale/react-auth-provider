@@ -1,4 +1,5 @@
-import { Component, Children, PropTypes } from 'react';
+import React, { Component, Children, PropTypes } from 'react';
+import unauthorisedComponentWrapper from './unauthorisedComponentWrapper';
 
 class AuthenticatedContainer extends Component {
   constructor(props) {
@@ -6,9 +7,9 @@ class AuthenticatedContainer extends Component {
     const notifyMount = props.onAutheticatedComponentMount || (() => {});
 
     this.state = {
-      authenticatedComponentMounted: false,
       notifyMount,
     };
+    this.authenticatedComponentMounted = false;
   }
 
   getChildContext() {
@@ -16,9 +17,8 @@ class AuthenticatedContainer extends Component {
     const { isAuthenticated } = this.context;
 
     const authenticatedComponentWillMount = () => {
-      this.setState({
-        authenticatedComponentMounted: true,
-      });
+      this.authenticatedComponentMounted = true;
+      this.forceUpdate();
       if (!isAuthenticated) {
         notifyMount();
       }
@@ -31,11 +31,12 @@ class AuthenticatedContainer extends Component {
 
   render() {
     const { children, unauthorisedComponent } = this.props;
-    const { authenticatedComponentMounted } = this.state;
     const { isAuthenticated } = this.context;
-
-    if (authenticatedComponentMounted && !isAuthenticated) {
-      return unauthorisedComponent;
+    if (this.authenticatedComponentMounted && !isAuthenticated) {
+      const Unauthorised = unauthorisedComponentWrapper(unauthorisedComponent);
+      return (
+        <Unauthorised onMount={() => { this.authenticatedComponentMounted = false; }} />
+      );
     }
 
     return Children.only(children);
@@ -43,7 +44,7 @@ class AuthenticatedContainer extends Component {
 }
 
 AuthenticatedContainer.propTypes = {
-  unauthorisedComponent: PropTypes.node.isRequired,
+  unauthorisedComponent: PropTypes.any,
   onAutheticatedComponentMount: PropTypes.func,
 };
 
