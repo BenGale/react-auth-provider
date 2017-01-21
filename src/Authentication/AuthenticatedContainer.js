@@ -4,7 +4,7 @@ import unauthorisedComponentWrapper from './unauthorisedComponentWrapper';
 class AuthenticatedContainer extends Component {
   constructor(props) {
     super(props);
-    const notifyMount = props.onAutheticatedComponentMount || (() => {});
+    const notifyMount = props.onAuthenticatedComponentMount || (() => {});
 
     this.state = {
       notifyMount,
@@ -39,13 +39,13 @@ class AuthenticatedContainer extends Component {
       );
     }
 
-    return Children.only(children);
+    return children;
   }
 }
 
 AuthenticatedContainer.propTypes = {
   unauthorisedComponent: PropTypes.any,
-  onAutheticatedComponentMount: PropTypes.func,
+  onAuthenticatedComponentMount: PropTypes.func,
 };
 
 AuthenticatedContainer.contextTypes = {

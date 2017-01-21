@@ -14,7 +14,7 @@ class AuthenticatedComponent extends Component {
     const { isAuthenticated } = this.context;
 
     if (isAuthenticated) {
-      return Children.only(children);
+      return children;
     }
 
     return unauthorisedComponent ? unauthorisedComponent : <div></div>;
@@ -25,9 +25,13 @@ AuthenticatedComponent.propTypes = {
   unauthorisedComponent: PropTypes.node,
 };
 
+AuthenticatedComponent.defaultProps = {
+  isAuthenticated: false,  
+};
+
 AuthenticatedComponent.contextTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   authenticatedComponentWillMount: PropTypes.func,
-}
+};
 
 export default AuthenticatedComponent;
