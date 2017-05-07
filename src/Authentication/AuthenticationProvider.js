@@ -2,10 +2,11 @@ import { Component, Children, PropTypes } from 'react';
 
 class AuthenticationProvider extends Component {
   getChildContext() {
-    const { authenticationState } = this.props;
+    const { authenticationState, onAuthenticatedMount } = this.props;
 
     return {
       isAuthenticated: authenticationState,
+      onAuthenticatedMount,
     };
   }
 
@@ -18,10 +19,12 @@ class AuthenticationProvider extends Component {
 
 AuthenticationProvider.propTypes = {
   authenticationState: PropTypes.bool.isRequired,
+  onAuthenticatedMount: PropTypes.func,
 };
 
 AuthenticationProvider.childContextTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  onAuthenticatedMount: PropTypes.func,
 };
 
 export default AuthenticationProvider;

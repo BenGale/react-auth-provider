@@ -2,10 +2,12 @@ import React, { Component, Children, PropTypes } from 'react';
 import unauthorisedComponentWrapper from './unauthorisedComponentWrapper';
 
 class AuthenticatedContainer extends Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
-    const notifyMount = props.onAutheticatedComponentMount || (() => {});
-
+    const notifyMount = 
+      props.onAutheticatedComponentMount ||
+      context.onAuthenticatedMount ||
+      (() => {});
     this.state = {
       notifyMount,
     };
@@ -50,6 +52,7 @@ AuthenticatedContainer.propTypes = {
 
 AuthenticatedContainer.contextTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  onAuthenticatedMount: PropTypes.func,
 }
 
 AuthenticatedContainer.childContextTypes = {
