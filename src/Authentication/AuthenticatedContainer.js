@@ -4,7 +4,7 @@ import unauthorisedComponentWrapper from './unauthorisedComponentWrapper';
 
 class AuthenticatedContainer extends Component {
   constructor(props, context) {
-    super(props);
+    super(props, context);
     const notifyMount =
       props.onAutheticatedComponentMount ||
       context.onAuthenticatedMount ||

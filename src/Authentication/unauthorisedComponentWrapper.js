@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const unauthorisedComponentWrapper = (Component) => {
-  class UnauthorisedComponent extends Component {
+const unauthorisedComponentWrapper = (UnauthorisedComponent) => {
+  class UnauthorisedComponentWrapper extends Component {
     componentDidMount() {
       const { onMount } = this.props;
       onMount();
@@ -9,11 +9,11 @@ const unauthorisedComponentWrapper = (Component) => {
 
     render() {
       const { onMount, ...otherProps } = this.props;
-      return <Component {...otherProps} />;
+      return <UnauthorisedComponent {...otherProps} />;
     }
   };
 
-  return UnauthorisedComponent;
+  return UnauthorisedComponentWrapper;
 }
 
 export default unauthorisedComponentWrapper;
