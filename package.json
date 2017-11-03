@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "author": "Ben Gale",
   "main": "lib/index.js",
-  "homepage": "http://bengale.github.io/react-auth-provider",
+  "homepage": "https://bengale.github.io/react-auth-provider/",
   "repository": {
     "type": "git",
     "url": "git://github.com/bengale/react-auth-provider.git"
