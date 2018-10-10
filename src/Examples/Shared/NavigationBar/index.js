@@ -9,9 +9,9 @@ const NavigationBar = ({ contentOptions, active, onClick }) => (
           key={index}
           className={active === content.componentName ? 'active' : ''}
         >
-          <a href="#" onClick={() => onClick(content.componentName)}>
+          <button onClick={() => onClick(content.componentName)}>
             { content.displayName }
-          </a>
+          </button>
         </li>
       ))
     }
